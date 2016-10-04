@@ -1,6 +1,14 @@
 #!/usr/bin/env python
 """Pull completed tasks from RTM and show only the last 30 days of them.
-Largely copied from the examples in the RtmApi codebase."""
+Largely copied from the examples in the RtmApi codebase.
+
+call the program with the following environment variables:
+     API_KEY
+     SHARED_SECRET
+     TOKEN (optional - if not provided, it will get one via a web browser
+            request and display it so you can put it into your environment)
+get those parameters from  http://www.rememberthemilk.com/services/api/keys.rtm
+"""
 import datetime
 import sys
 import os
@@ -10,13 +18,6 @@ from rtmapi import Rtm
 
 def get_filtered_tasks(api_key, shared_secret, token):
     """ Gets tasks from RTM and prints them """
-    # call the program with the following environment variables:
-    #     API_KEY
-    #     SHARED_SECRET
-    #     TOKEN (optional - if not provided, it will get one via a web browser
-    #     request and display it so you can put it into your environment)
-    # get those parameters from
-    # http://www.rememberthemilk.com/services/api/keys.rtm
     api = Rtm(api_key, shared_secret, "delete", token)
 
     # authenication block, see
