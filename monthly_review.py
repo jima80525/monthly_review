@@ -51,19 +51,28 @@ def get_filtered_tasks(api_key, shared_secret, token):
         'lastpass cleanup',
         'update backup task',
         'pay bills',
+        'make girls lunches',
+        'make my lunch',
+        'django studying',
     ]
     # TODO add method for modifying time range
     start_date = datetime.datetime.now() + datetime.timedelta(-30)
     # get all completed tasks
     result = api.rtm.tasks.getList(filter="status:completed")
+    tasks = list()
     for tasklist in result.tasks:
         for taskseries in sorted(tasklist, key=lambda ts: ts.task.completed):
             date_completed = datetime.datetime.strptime(
                 taskseries.task.completed[:10], '%Y-%m-%d')
             if date_completed > start_date:
                 # completed after the start of the range
-                if taskseries.name not in repeated_tasks:
-                    print(taskseries.task.completed, taskseries.name)
+                if taskseries.name not in repeated_tasks and not \
+                     taskseries.name.startswith('quicken'):
+                    tasks.append("{0} {1}".format(taskseries.task.completed,
+                                                  taskseries.name))
+    # print out the tasks in order!
+    for task in sorted(tasks):
+        print(task)
 
 if __name__ == '__main__':
     sys.exit(get_filtered_tasks(os.environ['API_KEY'],
