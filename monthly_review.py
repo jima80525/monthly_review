@@ -9,6 +9,7 @@ call the program with the following environment variables:
             request and display it so you can put it into your environment)
 get those parameters from  http://www.rememberthemilk.com/services/api/keys.rtm
 """
+import click
 import datetime
 import sys
 import os
@@ -16,8 +17,12 @@ import webbrowser
 from rtmapi import Rtm
 
 
-def get_filtered_tasks(api_key, shared_secret, token):
+@click.command()
+def get_filtered_tasks():
     """ Gets tasks from RTM and prints them """
+    api_key = os.environ['API_KEY']
+    shared_secret = os.environ['SHARED_SECRET']
+    token = os.environ['TOKEN']
     api = Rtm(api_key, shared_secret, "delete", token)
 
     # authenication block, see
@@ -71,10 +76,7 @@ def get_filtered_tasks(api_key, shared_secret, token):
                     tasks.append("{0} {1}".format(taskseries.task.completed,
                                                   taskseries.name))
     # print out the tasks in order!
-    for task in sorted(tasks):
-        print(task)
+    click.echo_via_pager('\n'.join(sorted(tasks)))
 
 if __name__ == '__main__':
-    sys.exit(get_filtered_tasks(os.environ['API_KEY'],
-                                os.environ['SHARED_SECRET'],
-                                os.environ['TOKEN']))
+    get_filtered_tasks()
