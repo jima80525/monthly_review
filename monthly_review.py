@@ -11,7 +11,6 @@ get those parameters from  http://www.rememberthemilk.com/services/api/keys.rtm
 """
 import click
 import datetime
-import sys
 import os
 import webbrowser
 from rtmapi import Rtm
@@ -22,7 +21,7 @@ def get_filtered_tasks():
     """ Gets tasks from RTM and prints them """
     api_key = os.environ['API_KEY']
     shared_secret = os.environ['SHARED_SECRET']
-    token = os.environ['TOKEN']
+    token = os.environ['TOKEN'] or None
     api = Rtm(api_key, shared_secret, "delete", token)
 
     # authenication block, see
@@ -56,9 +55,10 @@ def get_filtered_tasks():
         'lastpass cleanup',
         'update backup task',
         'pay bills',
-        'make girls lunches',
+        'make lunch for girls',
         'make my lunch',
         'django studying',
+        'Python studying',
     ]
     # TODO add method for modifying time range
     start_date = datetime.datetime.now() + datetime.timedelta(-30)
