@@ -8,6 +8,11 @@ call the program with the following environment variables:
      TOKEN (optional - if not provided, it will get one via a web browser
             request and display it so you can put it into your environment)
 get those parameters from  http://www.rememberthemilk.com/services/api/keys.rtm
+
+If you are using virtualenvwrapper, your virtualenv will be in the
+~/.virtualenvs directory.  Edit the bin/activate script in the virtualenv 
+and add the above-mentioned environment variables there so ensure you have 
+them set each time you run the script!
 """
 import click
 import datetime
@@ -21,7 +26,10 @@ def get_filtered_tasks():
     """ Gets tasks from RTM and prints them """
     api_key = os.environ['API_KEY']
     shared_secret = os.environ['SHARED_SECRET']
-    token = os.environ['TOKEN'] or None
+    if 'TOKEN' in os.environ:
+        token = os.environ['TOKEN'] 
+    else:
+        token = None
     api = Rtm(api_key, shared_secret, "delete", token)
 
     # authenication block, see
