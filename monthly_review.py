@@ -10,8 +10,8 @@ call the program with the following environment variables:
 get those parameters from  http://www.rememberthemilk.com/services/api/keys.rtm
 
 If you are using virtualenvwrapper, your virtualenv will be in the
-~/.virtualenvs directory.  Edit the bin/activate script in the virtualenv 
-and add the above-mentioned environment variables there so ensure you have 
+~/.virtualenvs directory.  Edit the bin/activate script in the virtualenv
+and add the above-mentioned environment variables there so ensure you have
 them set each time you run the script!
 """
 import click
@@ -27,7 +27,7 @@ def get_filtered_tasks():
     api_key = os.environ['API_KEY']
     shared_secret = os.environ['SHARED_SECRET']
     if 'TOKEN' in os.environ:
-        token = os.environ['TOKEN'] 
+        token = os.environ['TOKEN']
     else:
         token = None
     api = Rtm(api_key, shared_secret, "delete", token)
@@ -49,9 +49,11 @@ def get_filtered_tasks():
 
     repeated_tasks = [
         'log miles',
+        'oreo medicine',
         'clean basement',
         'cleaning',
         'bread',
+        'meditate',
         'waterbottle note',
         'job search',
         'fill birdfeeder',
@@ -66,7 +68,12 @@ def get_filtered_tasks():
         'make lunch for girls',
         'make my lunch',
         'django studying',
+        'download audiobooks',
         'Python studying',
+        'yoga toes',
+        'watermelon',
+        'pycon lectures  lucasz 60:00',
+
     ]
     # TODO add method for modifying time range
     start_date = datetime.datetime.now() + datetime.timedelta(-30)
