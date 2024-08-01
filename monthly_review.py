@@ -49,6 +49,8 @@ def get_filtered_tasks():
 
     repeated_tasks = [
         'log miles',
+        'study german',
+        'meditate',
         'oreo medicine',
         'clean basement',
         'cleaning',
@@ -61,7 +63,8 @@ def get_filtered_tasks():
         'charge phone',
         'yardwaste bin',
         'girls bath',
-        'update girls blog',
+        'update monsters blog',
+        'sprinklers',
         'lastpass cleanup',
         'update backup task',
         'pay bills',
